@@ -1,4 +1,4 @@
-package com.integrador.SocialMeli;
+package com.integrador.socialmeli;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

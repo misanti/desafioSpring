@@ -2,8 +2,7 @@
   {
     "userId": 1,
     "userName": "Micela",
-    "followed":
-    []
+    "followed": []
   },
   {
     "userId": 2,
@@ -13,25 +12,21 @@
   {
     "userId": 3,
     "userName": "Sandra",
-    "followed":
-    []
+    "followed": []
   },
   {
     "userId": 4,
     "userName": "Jose Luis",
-    "followed":
-    []
+    "followed": []
   },
   {
     "userId": 5,
     "userName": "Julio",
-    "followed":
-    []
+    "followed": []
   },
   {
     "userId": 6,
     "userName": "Marcos",
-    "followed":
-    []
+    "followed": []
   }
 ]

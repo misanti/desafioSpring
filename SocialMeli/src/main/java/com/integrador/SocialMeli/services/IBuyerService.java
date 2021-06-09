@@ -1,11 +1,10 @@
-package com.integrador.SocialMeli.services;
+package com.integrador.socialmeli.services;
 
-import com.integrador.SocialMeli.dto.BuyerDTO;
-import com.integrador.SocialMeli.dto.SellerDTO;
-
-import java.util.ArrayList;
+import com.integrador.socialmeli.dto.BuyerWithFollowedDTO;
 
 public interface IBuyerService {
-    public BuyerDTO followSeller(Integer buyerId, Integer sellerId);
+    public void followSeller(Integer buyerId, Integer sellerId);
+    public void unfollowSeller(Integer buyerId, Integer sellerId);
 
+    public BuyerWithFollowedDTO getBuyerWithFollowedById(Integer userId);
 }

@@ -1,8 +1,8 @@
-package com.integrador.SocialMeli.services;
+package com.integrador.socialmeli.services;
 
-import com.integrador.SocialMeli.dto.SellerDTO;
-import com.integrador.SocialMeli.repositories.ISellerRepository;
-import com.integrador.SocialMeli.repositories.SellerRepository;
+import com.integrador.socialmeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerWithFollowersDTO;
+import com.integrador.socialmeli.repositories.ISellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +13,18 @@ public class SellerService implements ISellerService {
     private ISellerRepository sellerRepository;
 
     @Override
-
-    //cambiar el nombre del metodo y devolver el SellerDTO.
-
-   public SellerDTO getSeller(Integer userId) {
-        // Seteo el numero de seguidores en followCount
-        sellerRepository.getSellerById(userId).setFollowersCount(sellerRepository.getSellerById(userId).getFollowers().size());
+    public SellerDTO getSeller(Integer userId) {
         return sellerRepository.getSellerById(userId);
     }
 
     @Override
-    public SellerDTO getFollowersBySellerId(Integer userId) {
-        return sellerRepository.getFollowersBySellerId(userId);
+    public SellerWithFollowersDTO getFollowersBySellerId(Integer userId) {
+        return sellerRepository.getSellerWithFollowersById(userId);
     }
 
+    @Override
+    public void newPost() {
+
+    }
 
 }

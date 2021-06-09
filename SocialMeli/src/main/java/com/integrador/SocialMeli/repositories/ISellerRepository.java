@@ -1,17 +1,21 @@
-package com.integrador.SocialMeli.repositories;
+package com.integrador.socialmeli.repositories;
 
-import com.integrador.SocialMeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerWithFollowersDTO;
 
 import java.util.List;
 
 public interface ISellerRepository {
-    // Obtiene todos los vendedores
-    List<SellerDTO> getSellers();
 
-    // Obtiene los vendedores por codigo de vendedor - ID
+    // Obtiene una lista de todos los vendedores con sus seguidores
+    List<SellerWithFollowersDTO> getSellersWithFollowers();
+
+    // Obtiene un vendedor con sus seguidores por ID pasado como parametro
+    SellerWithFollowersDTO getSellerWithFollowersById(Integer userId);
+
+    // Obtiene un vendedor de SellerDTO por ID pasado como parametro
     SellerDTO getSellerById(Integer userId);
 
-    // Obtener seguidores por codigo de vendedor - ID
-    SellerDTO getFollowersBySellerId(Integer userId);
-
+    // Cambiar instancia de SellerWithFollowersDTO a SellerDTO
+    public SellerDTO changeInstance(SellerWithFollowersDTO seller);
 }

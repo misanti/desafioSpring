@@ -1,7 +1,8 @@
-package com.integrador.SocialMeli.repositories;
+package com.integrador.socialmeli.repositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.integrador.SocialMeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerWithFollowersDTO;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
@@ -12,40 +13,43 @@ import java.util.List;
 @Repository
 public class SellerRepository implements ISellerRepository {
 
-    List<SellerDTO> seller;
+    List<SellerWithFollowersDTO> seller;
 
     public SellerRepository() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            seller = Arrays.asList(mapper.readValue(new ClassPathResource("sellers.json").getFile(), SellerDTO[].class));
+            seller = Arrays.asList(mapper.readValue(new ClassPathResource("sellers.json").getFile(), SellerWithFollowersDTO[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public List<SellerDTO> getSellers() {
+    public List<SellerWithFollowersDTO> getSellersWithFollowers() {
         return seller;
+    }
+
+    @Override
+    public SellerWithFollowersDTO getSellerWithFollowersById(Integer userId) {
+        return this.getSellersWithFollowers().stream()
+                .filter(sellerId -> sellerId.getUserId() == userId)
+                .findFirst().get();
     }
 
     @Override
     public SellerDTO getSellerById(Integer userId) {
-
-        SellerDTO seller = this.getSellers().stream()
-                .filter(sellerId -> sellerId.getUserId() == userId)
-                .findFirst().get();
-        return seller;
-
+        SellerWithFollowersDTO seller = this.getSellerWithFollowersById(userId);
+        return this.changeInstance(seller);
     }
+
     @Override
-    public SellerDTO getFollowersBySellerId(Integer userId) {
-
-        SellerDTO seller = this.getSellers().stream()
-                .filter(sellerId -> sellerId.getUserId() == userId)
-                .findFirst().get();
-        seller.getFollowers().stream().findAny();
-        return seller;
-
+    public SellerDTO changeInstance(SellerWithFollowersDTO seller) {
+        // Creo una instancia de SellerDTO y seteo los valores
+        SellerDTO sellerDTO = new SellerDTO();
+        sellerDTO.setFollowersCount(seller.getFollowers().size());
+        sellerDTO.setUserId(seller.getUserId());
+        sellerDTO.setUserName(seller.getUserName());
+        return sellerDTO;
     }
 
 }

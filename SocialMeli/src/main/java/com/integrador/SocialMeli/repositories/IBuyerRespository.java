@@ -1,15 +1,19 @@
-package com.integrador.SocialMeli.repositories;
+package com.integrador.socialmeli.repositories;
 
-import com.integrador.SocialMeli.dto.BuyerDTO;
-import com.integrador.SocialMeli.dto.SellerDTO;
-import org.springframework.stereotype.Repository;
+import com.integrador.socialmeli.dto.BuyerDTO;
+import com.integrador.socialmeli.dto.BuyerWithFollowedDTO;
 
 import java.util.List;
 
 
 public interface IBuyerRespository {
-    List<BuyerDTO> getBuyers();
+    // Obtiene una lista de todos los compradores y a quienes sigue
+    List<BuyerWithFollowedDTO> getBuyerWithFollowed();
 
-    // Obtener seguidores por codigo de comprador - ID
-   // SellerDTO getFollowersByBuyerId(Integer userId);
+    // Obtiene un comprador y a quienes sigue con  ID pasado como parametro
+    BuyerWithFollowedDTO getBuyerWithFollowedById(Integer userId);
+
+    // Cambiar instancia de BuyerWithFollowersDTO a BuyerDTO
+    public BuyerDTO changeInstance(BuyerWithFollowedDTO buyer);
+
 }

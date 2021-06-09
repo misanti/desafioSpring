@@ -1,10 +1,12 @@
-package com.integrador.SocialMeli.services;
+package com.integrador.socialmeli.services;
 
-import com.integrador.SocialMeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerDTO;
+import com.integrador.socialmeli.dto.SellerWithFollowersDTO;
 
 
 public interface ISellerService {
     public SellerDTO getSeller(Integer userId);
-    public SellerDTO getFollowersBySellerId(Integer userId);
+    public SellerWithFollowersDTO getFollowersBySellerId(Integer userId);
+    public void newPost();
 
 }

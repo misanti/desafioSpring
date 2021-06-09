@@ -2,43 +2,32 @@
   {
     "userId": 1,
     "userName": "Julia Vendedora",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
   },
   {
     "userId": 2,
     "userName": "Pedro Vendedor",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
+
   },
   {
     "userId": 3,
     "userName": "Nelida Vendedora",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
   },
   {
     "userId": 4,
     "userName": "Jose Vendedor",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
   },
   {
     "userId": 5,
     "userName": "Santiago Vendedor",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
   },
   {
     "userId": 6,
     "userName": "Mauricio Vendedor",
-    "followers": [],
-    "post": [],
-    "followersCount": null
+    "followers": []
   }
 ]

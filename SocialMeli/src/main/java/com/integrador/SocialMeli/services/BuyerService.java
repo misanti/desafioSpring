@@ -1,9 +1,9 @@
-package com.integrador.SocialMeli.services;
+package com.integrador.socialmeli.services;
 
-import com.integrador.SocialMeli.dto.BuyerDTO;
-import com.integrador.SocialMeli.dto.SellerDTO;
-import com.integrador.SocialMeli.repositories.IBuyerRespository;
-import com.integrador.SocialMeli.repositories.ISellerRepository;
+import com.integrador.socialmeli.dto.BuyerWithFollowedDTO;
+import com.integrador.socialmeli.dto.SellerWithFollowersDTO;
+import com.integrador.socialmeli.repositories.IBuyerRespository;
+import com.integrador.socialmeli.repositories.ISellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ public class BuyerService implements IBuyerService {
     private ISellerRepository sellerRepository;
 
     @Override
-    public BuyerDTO followSeller(Integer buyerId, Integer sellerId) {
+    public void followSeller(Integer buyerId, Integer sellerId) {
 
         // Busco si encuentro el comprador
-        BuyerDTO buyer = this.serachBuyerById(buyerId);
+        BuyerWithFollowedDTO buyer = buyerRespository.getBuyerWithFollowedById(buyerId);
 
         // Si buyer == null, corto la ejecucion
         if (buyer == null) {
@@ -26,7 +26,7 @@ public class BuyerService implements IBuyerService {
         }
 
         // Si buyer != null, busco el seller
-        SellerDTO seller = this.searchSellerById(sellerId);
+        SellerWithFollowersDTO seller = sellerRepository.getSellerWithFollowersById(sellerId);
 
         // Si seller == null, corto la ejecucion
         if (seller == null) {
@@ -40,33 +40,48 @@ public class BuyerService implements IBuyerService {
 
         /* Si no lo sigue, agrego a las listas de vendedores y usuarios para dejar
         constancia del usuario que sigue al vendedor */
-        buyer.setFollowedById(seller.getUserId());
-        seller.setFollower(buyer.getUserId());
+        buyer.addFollowed(sellerRepository.changeInstance(seller));
+        seller.setFollower(buyerRespository.changeInstance(buyer));
 
-        return buyer;
         // TO DO -> Validaciones
-        //
+    }
+
+    @Override
+    public void unfollowSeller(Integer buyerId, Integer sellerId) {
+
+        // Busco si encuentro el comprador
+        BuyerWithFollowedDTO buyer = buyerRespository.getBuyerWithFollowedById(buyerId);
+
+        // Si buyer == null, corto la ejecucion
+        if (buyer == null) {
+            throw new RuntimeException("Buyer doesn't existe");
+        }
+
+        // Si buyer != null, busco el seller
+        SellerWithFollowersDTO seller = sellerRepository.getSellerWithFollowersById(sellerId);
+
+        // Si seller == null, corto la ejecucion
+        if (seller == null) {
+            throw new RuntimeException("Seller doesn't exist");
+        }
+
+        // Verifico que el usuario siga al vendedor
+        if ((buyer.getFollowed().contains(sellerId))) {
+             /* Si no lo sigue, agrego a las listas de vendedores y usuarios para dejar
+        constancia del usuario que sigue al vendedor */
+            buyer.unfollowed(sellerRepository.changeInstance(seller));
+            seller.setUnfollower(buyerRespository.changeInstance(buyer));
+        }
+
+
+
+        // TO DO -> Validaciones
     }
 
 
-    private BuyerDTO serachBuyerById(Integer buyerId) {
-        BuyerDTO buyer = buyerRespository.getBuyers().stream()
-                .filter(user -> user.getUserId() == buyerId)
-                .findFirst().get();
-
-        return buyer;
+    @Override
+    public BuyerWithFollowedDTO getBuyerWithFollowedById(Integer userId) {
+        return buyerRespository.getBuyerWithFollowedById(userId);
     }
-
-    private SellerDTO searchSellerById(Integer sellerId) {
-
-        SellerDTO seller = sellerRepository.getSellers()
-                .stream()
-                .filter(seller1 -> seller1.getUserId() == sellerId)
-                .findFirst()
-                .get();
-
-        return seller;
-    }
-
 
 }
