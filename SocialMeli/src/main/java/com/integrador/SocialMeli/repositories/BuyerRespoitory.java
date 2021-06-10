@@ -3,6 +3,8 @@ package com.integrador.socialmeli.repositories;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.integrador.socialmeli.dto.BuyerDTO;
 import com.integrador.socialmeli.dto.BuyerWithFollowedDTO;
+import com.integrador.socialmeli.dto.PostByBuyerDTO;
+import com.integrador.socialmeli.model.Post;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,8 @@ import java.util.List;
 public class BuyerRespoitory implements IBuyerRespository {
 
     List<BuyerWithFollowedDTO> buyer;
-// solo guardar entity no DTO
+    // Cambiar el DTO al model Buyer
+
     public BuyerRespoitory() {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -25,13 +28,13 @@ public class BuyerRespoitory implements IBuyerRespository {
     }
 
     @Override
-    public List<BuyerWithFollowedDTO> getBuyerWithFollowed() {
+    public List<BuyerWithFollowedDTO> obtainBuyerWithFollowed() {
         return buyer;
     }
 
     @Override
-    public BuyerWithFollowedDTO getBuyerWithFollowedById(Integer userId) {
-        return this.getBuyerWithFollowed().stream()
+    public BuyerWithFollowedDTO obtainBuyerWithFollowedById(Integer userId) {
+        return this.obtainBuyerWithFollowed().stream()
                 .filter(buyerId -> buyerId.getUserId() == userId)
                 .findFirst().get();
     }
@@ -44,6 +47,7 @@ public class BuyerRespoitory implements IBuyerRespository {
         buyerDTO.setUserName(buyer.getUserName());
         return buyerDTO;
     }
+
 
 
 }

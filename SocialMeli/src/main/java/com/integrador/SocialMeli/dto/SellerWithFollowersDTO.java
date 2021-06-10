@@ -14,11 +14,11 @@ public class SellerWithFollowersDTO {
     private String userName;
     private ArrayList<BuyerDTO> followers; // lista con usuarios que siguen a un determinado vendedor
 
-    // cambiar nombres 
-    public void setFollower(BuyerDTO follower) {
+    // cambiar nombres
+    public void addFollow(BuyerDTO follower) {
         this.followers.add(follower);
     }
-    public void setUnfollower(BuyerDTO follower) {
+    public void unfollowBuyer(BuyerDTO follower) {
         this.followers.remove(follower);
     }
 

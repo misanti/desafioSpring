@@ -8,14 +8,14 @@ import java.util.List;
 public interface ISellerRepository {
 
     // Obtiene una lista de todos los vendedores con sus seguidores
-    List<SellerWithFollowersDTO> getSellersWithFollowers();
+    List<SellerWithFollowersDTO> obtainSellersWithFollowers();
 
     // Obtiene un vendedor con sus seguidores por ID pasado como parametro
-    SellerWithFollowersDTO getSellerWithFollowersById(Integer userId);
+    SellerWithFollowersDTO obtainSellerWithFollowersById(Integer userId);
 
     // Obtiene un vendedor de SellerDTO por ID pasado como parametro
-    SellerDTO getSellerById(Integer userId);
+    SellerDTO obtainSellerById(Integer userId);
 
     // Cambiar instancia de SellerWithFollowersDTO a SellerDTO
-    public SellerDTO changeInstance(SellerWithFollowersDTO seller);
+    SellerDTO changeInstance(SellerWithFollowersDTO seller);
 }

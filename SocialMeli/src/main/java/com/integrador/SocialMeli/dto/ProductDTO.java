@@ -1,5 +1,12 @@
 package com.integrador.socialmeli.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDTO {
     private Integer productId;
     private String productName;

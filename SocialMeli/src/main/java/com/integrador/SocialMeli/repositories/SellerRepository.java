@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public class SellerRepository implements ISellerRepository {
 
-    List<SellerWithFollowersDTO> seller;
-
+   private List<SellerWithFollowersDTO> seller;
+    // Cambiar el DTO al model Seller
     public SellerRepository() {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -25,20 +25,20 @@ public class SellerRepository implements ISellerRepository {
     }
 
     @Override
-    public List<SellerWithFollowersDTO> getSellersWithFollowers() {
+    public List<SellerWithFollowersDTO> obtainSellersWithFollowers() {
         return seller;
     }
 
     @Override
-    public SellerWithFollowersDTO getSellerWithFollowersById(Integer userId) {
-        return this.getSellersWithFollowers().stream()
+    public SellerWithFollowersDTO obtainSellerWithFollowersById(Integer userId) {
+        return this.obtainSellersWithFollowers().stream()
                 .filter(sellerId -> sellerId.getUserId() == userId)
                 .findFirst().get();
     }
 
     @Override
-    public SellerDTO getSellerById(Integer userId) {
-        SellerWithFollowersDTO seller = this.getSellerWithFollowersById(userId);
+    public SellerDTO obtainSellerById(Integer userId) {
+        SellerWithFollowersDTO seller = this.obtainSellerWithFollowersById(userId);
         return this.changeInstance(seller);
     }
 
