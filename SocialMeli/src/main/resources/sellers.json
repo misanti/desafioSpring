@@ -1,0 +1,33 @@
+[
+  {
+    "userId": 1,
+    "userName": "Julia Vendedora",
+    "followers": []
+  },
+  {
+    "userId": 2,
+    "userName": "Pedro Vendedor",
+    "followers": []
+
+  },
+  {
+    "userId": 3,
+    "userName": "Nelida Vendedora",
+    "followers": []
+  },
+  {
+    "userId": 4,
+    "userName": "Jose Vendedor",
+    "followers": []
+  },
+  {
+    "userId": 5,
+    "userName": "Santiago Vendedor",
+    "followers": []
+  },
+  {
+    "userId": 6,
+    "userName": "Mauricio Vendedor",
+    "followers": []
+  }
+]
